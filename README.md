@@ -32,34 +32,27 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   python webDetect.py
-
-
-
+   python webapp.py
 
 ## Screenshots
 
 ### Login Page
-<img src="screenshot/loginPage.png" alt="Login Screen" width="20%">
+<img src="screenshots/homepage.png" alt="Homapage Screen" width="20%">
 
 ### Admin Page
-<img src="screenshot/admin_order.png" alt="Admin Order Tracking Page" width="20%">     <img src="screenshot/admin_updateOrder.png" alt="Admin Update Order Page" width="20%">
+<img src="screenshots/webcam.png" alt="Webcam Page" width="20%">  
 
 
 ### User Page
-<img src="screenshot/user_order.png" alt="User Order Page" width="20%">     <img src="screenshot/user_addNewOrder.png" alt="User Create Order Page" width="20%">
+<img src="screenshots/ImageDetect.png" alt="Image Detection Page" width="20%">     
 
 
 ## Technologies Used
 
-- Restful Api
-- Java
+- Python
+- Flask
+- YOLO
   
-## Contributors
 
-- Hafizul Ikram 
-- Wan Hafidzul Haziq 
-- Irfan Haneef
-- Isma Nabil Aidid 
 
 
