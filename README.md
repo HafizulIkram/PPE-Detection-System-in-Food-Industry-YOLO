@@ -21,6 +21,21 @@ To set up the project locally, follow these steps:
    git clone https://github.com/HafizulIkram/PPE-Detection-System-in-Food-Industry-YOLO.git
    cd PPE-Detection-System-in-Food-Industry-YOLO
 
+2. **Create and activate a virtual environment**
+    ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+
+## Usage
+
+
+1. **Clone the repository:**
+   ```bash
+   python webDetect.py
+
+
+
 
 ## Screenshots
 
