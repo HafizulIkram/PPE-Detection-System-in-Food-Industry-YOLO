@@ -37,14 +37,14 @@ To set up the project locally, follow these steps:
 ## Screenshots
 
 ### Login Page
-<img src="screenshots/homepage.png" alt="Homapage Screen" width="20%">
+<img src="screenshots/homepage.png" alt="Homapage Screen" width="40%">
 
 ### Admin Page
-<img src="screenshots/webcam.png" alt="Webcam Page" width="20%">  
+<img src="screenshots/webcam.png" alt="Webcam Page" width="40%">  
 
 
 ### User Page
-<img src="screenshots/ImageDetect.png" alt="Image Detection Page" width="20%">     
+<img src="screenshots/imageDetect.png" alt="Image Detection Page" width="40%">     
 
 
 ## Technologies Used
