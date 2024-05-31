@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Food Industry Detection System with YOLOv7</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    </div>
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>FoodDetect</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="/" class="nav-item nav-link active">Home</a>
+                <a href="/graphDis" class="nav-item nav-link">Graph</a>
+                <a href="/webDete" class="nav-item nav-link">Webcam</a>
+            </div>
+            <a href="/index" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Image Detection<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <div class="container-fluid header bg-primary p-0 mb-5">
+        <div class="row g-0 align-items-center flex-column-reverse flex-lg-row">
+            <div class="col-lg-6 p-5 wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="display-4 text-white mb-5">Food Industry Detection System based on YOLOv7</h1>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <div class="owl-carousel header-carousel">
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/food-manufacturing.webp') }}" alt="">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="d-flex flex-column">
+                        <img class="img-fluid rounded w-75 align-self-end" src="{{ url_for('static', filename='img/ppe_image.jpg') }}" alt="">
+                    </div>
+                </div>                
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <p class="d-inline-block border rounded-pill py-1 px-4">Background</p>
+                    <h1 class="mb-4">Personal Protective Equipment in Food Industry</h1>
+                    <p>The use of personal protective equipment (PPE) in the food industry is crucial for safeguarding both customers and employees from health risks by creating a barrier against contaminants. 
+                        Despite frequent inspections by health authorities, food poisoning remains a significant issue, as evidenced by the 18.40% incidence rate in 2021. PPE, including hair nets, masks, gloves, aprons, and shoes, is essential to prevent cross-contamination. </p>
+                    <p> A study of food handlers in Malaysia revealed varying compliance rates, with an average of 75% wearing aprons, 78% using hair restraints, 64% wearing gloves, and 74.5% wearing covered shoes.
+                        The study highlighted that a notable percentage of workers still neglect proper PPE usage, underscoring the need for improved compliance and the potential benefit of implementing an object detection system to monitor PPE use in the food industry.</p>
+                    
+                    <p class="d-inline-block border rounded-pill py-1 px-4">Objectives</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Design PPE Detection System</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Develop the Detection System</p>
+                    <p><i class="far fa-check-circle text-primary me-3"></i>Provide High Accuracy in Testing</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
