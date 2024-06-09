@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Generation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 0 auto;
+            display: inline-block;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form-container label, 
+        .form-container input, 
+        .form-container button {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        .form-container button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 0 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 calc(50% - 40px);
+            box-sizing: border-box;
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+        .analysis {
+            text-align: justify;
+        }
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Generate Report</h1>
+        <div class="form-container">
+            <form action="/generate_report" method="post">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" required value="{{ start_date if start_date else '' }}">
+                <br>
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" required value="{{ end_date if end_date else '' }}">
+                <br>
+                <button type="submit">Generate Report</button>
+            </form>
+        </div>
+    </div>
+    {% if start_date and end_date %}
+        <div class="container">
+            <div class="card">
+                <h2>Class Distribution</h2>
+                <img src="/class_chart" alt="Class Distribution">
+            </div>
+            <div class="card analysis">
+                <h2>Class Distribution Analysis</h2>
+                <p>{{ analysis_paragraph.split('\n\n')[1] }}</p>
+            </div>
+            <div class="card">
+                <h2>Completion Status Distribution</h2>
+                <img src="/status_chart" alt="Completion Status Distribution">
+            </div>
+            <div class="card analysis">
+                <h2>Completion Status Analysis</h2>
+                <p>{{ analysis_paragraph.split('\n\n')[2] }}</p>
+            </div>
+        </div>
+        <div class="header">
+            <form action="/download_report" method="post">
+                <input type="hidden" name="start_date" value="{{ start_date.strftime('%Y-%m-%d') }}">
+                <input type="hidden" name="end_date" value="{{ end_date.strftime('%Y-%m-%d') }}">
+                <button type="submit">Download PDF Report</button>
+            </form>
+        </div>
+    {% endif %}
+</body>
+</html>

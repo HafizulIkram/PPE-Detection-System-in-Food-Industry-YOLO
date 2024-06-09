@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .container {
+            text-align: center;
+        }
+
+        .box {
+            display: inline-block;
+            width: 30%;
+            background-color: white;
+            margin: 10px;
+        }
+    </style>
+
+    <title>YOLOv7 Food Industry Detection Website</title>
+</head>
+<body>
+<div class="box">
+    <!-- script for opening a webcam and performing detections -->
+    <button id="start-webcam" onclick="startWebcam()" class="btn btn-lg btn-primary btn-block">Start Webcam</button>
+    <div id="webcam-container"></div>
+
+
+  
+    <script>
+        
+
+        function startWebcam() {
+            window.location.href = "/webcam_feed";
+        }
+
+    </script>
+    <!-- webcam ends here -->
+
+
+
+
+</div>
+</body>
+</html>
