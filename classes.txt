@@ -1,0 +1,7 @@
+apron
+hairnet
+footwear
+no_apron
+no_hairnet
+no_footwear
+person

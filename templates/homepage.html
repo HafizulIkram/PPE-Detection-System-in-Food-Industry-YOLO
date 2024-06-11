@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLOv7 Food Industry Detection Website</title>
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="topnav">
+        <a href="/"><span>Home</span></a>
+        <a href="/index">Upload Image</a>
+        <a href="/webcam">Camera</a>
+        <a href="/report">Report</a>
+    </div>
+
+
+    <!-- Content area -->
+    <div style="padding:20px;">
+      <!-- Welcome section -->
+      <div class="welcome-section">
+          <h1>Welcome!</h1>
+          <p>This project aims to...</p>
+      </div>
+
+      <!-- Flask content -->
+      {% block content %}
+      <!-- This is where content from Flask will be inserted -->
+      {% endblock %}
+  </div>
+</body>
+</html>

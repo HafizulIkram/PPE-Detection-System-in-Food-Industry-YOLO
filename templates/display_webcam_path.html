@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Streaming</title>
+</head>
+<body>
+    <video id="webcamVideo" autoplay></video>
+
+    <script>
+        var videoElement = document.getElementById('webcamVideo');
+
+        // Fetch the webcam stream from the server
+        fetch('/videoWeb_feed')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch webcam stream');
+                }
+                return response.body;
+            })
+            .then(body => {
+                const reader = body.getReader();
+                const stream = new ReadableStream({
+                    start(controller) {
+                        function push() {
+                            reader.read().then(({ done, value }) => {
+                                if (done) {
+                                    console.log('Stream complete');
+                                    controller.close();
+                                    return;
+                                }
+                                // Convert Uint8Array to Blob and create object URL
+                                const blob = new Blob([value], { type: 'image/jpeg' });
+                                const objectURL = URL.createObjectURL(blob);
+                                videoElement.src = objectURL;
+                                push();
+                            }).catch(error => {
+                                console.error('Error reading stream:', error);
+                                controller.error(error);
+                            });
+                        }
+                        push();
+                    }
+                });
+                return new Response(stream);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>

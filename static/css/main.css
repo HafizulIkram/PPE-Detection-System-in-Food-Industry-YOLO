@@ -1,0 +1,62 @@
+/* Main CSS styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("food-manufacturing.webp");
+  background-size: cover;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+/* Navigation bar CSS styles */
+.topnav {
+  overflow: hidden;
+  text-align: center; /* Center the navigation links */
+}
+
+.topnav a {
+  display: inline-block; /* Display links inline */
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.topnav a:hover {
+  background-color: #ddd; /* Darker background color on hover */
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D; /* Color of the active/current link */
+  color: white;
+}
+
+.topnav a span {
+  display: inline; /* Show text */
+}
+
+/* Welcome section CSS styles */
+.welcome-section {
+  text-align: center; /* Center the content */
+  color: white; /* Set font color to white */
+  padding: 5% 10%; /* Add percentage-based padding */
+  margin: 10% auto; /* Center the section vertically */
+}
+
+
