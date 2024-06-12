@@ -3,7 +3,7 @@ import argparse
 from yoloWebcam import detect_cam
 from report import generate_report, create_pdf_report
 from model import db, CompletionStatus, Class, DetectionEvent
-from report import generate_report, create_pdf_report, create_bar_chart, create_pie_chart
+from report import generate_report, create_pdf_report
 from imageDetection import detect_objects
 import os
 from werkzeug.utils import secure_filename
@@ -53,7 +53,7 @@ status_chart_filename = None
 def initialize_camera():
     global camera, is_camera_active
     if camera is None or not camera.isOpened():
-        camera = cv2.VideoCapture(0)
+        camera = cv2.VideoCapture(1)
     is_camera_active = True
 
 def release_camera():
@@ -78,10 +78,6 @@ def webcam():
 @app.route("/webDete")
 def webDete():
     return render_template('webpath.html')
-
-@app.route("/webDete_feed")
-def webDete_feed():
-    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/graphDis")
 def graphDis():
@@ -273,7 +269,4 @@ def prediction_file(filename):
         abort(404)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Flask app exposing yolov7 models")
-    parser.add_argument("--port", default=5000, type=int, help="port number")
-    args = parser.parse_args()
-    app.run(host="0.0.0.0", port=args.port)
+   app.run(host='0.0.0.0', port=5000)

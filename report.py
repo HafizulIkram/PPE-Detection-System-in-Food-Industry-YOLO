@@ -1,14 +1,13 @@
 import matplotlib
 matplotlib.use('Agg')  # Use Agg backend for non-GUI environments
 
-from model import CompletionStatus, Class, DetectionEvent
-from datetime import datetime, timedelta
+from model import DetectionEvent
+from datetime import timedelta
 import pytz
 import matplotlib.pyplot as plt
 from fpdf import FPDF
 import os
 import tempfile
-import random
 
 def generate_report(start_date, end_date):
     # Ensure the dates are timezone-aware

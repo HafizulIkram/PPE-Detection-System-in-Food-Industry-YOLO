@@ -1,11 +1,6 @@
-import argparse
-import time
-from pathlib import Path
-
 import cv2
 import torch
 import torch.backends.cudnn as cudnn
-from numpy import random
 
 from models.experimental import attempt_load
 from utils.general import check_img_size, non_max_suppression, apply_classifier, scale_coords, xyxy2xywh, set_logging, increment_path
@@ -63,7 +58,7 @@ def process_frame(model, modelc, device, half, imgsz, frame, opt):
     with torch.no_grad():
         pred = model(img, augment=False)[0]
 
-    # Apply NMS
+    # Apply NMSiou_thres= 0.5
     pred = non_max_suppression(pred, conf_thres= 0.6, iou_thres= 0.5, classes=None, agnostic=False, multi_label=False)
 
     detected_classes = []
