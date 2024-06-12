@@ -8,7 +8,7 @@ model = YOLO("yolov7lBest.pt")
 model.conf = 0.65  # Set the confidence threshold to a reasonable value
 
 # Open the webcam
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # Loop through the video frames
 while cap.isOpened():
