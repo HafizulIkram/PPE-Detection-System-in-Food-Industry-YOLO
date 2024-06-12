@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 """
 Simple app to upload an image via a web form 
 and view the inference results on the image in the browser.
 """
-=======
->>>>>>> fa949f9 (newYOLO)
 import argparse
 import io
 from PIL import Image
@@ -56,42 +53,6 @@ def graphDis():
 
 
 
-@app.route("/webcam_feed")
-def webcam_feed():
-    def generate():
-<<<<<<< HEAD
-        process = Popen(["python", "detect.py", '--source', '0', "--weights", "yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
-=======
-        process = Popen(["python", "detect.py", '--source', '0', "--weights", "YoloWeight\yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
->>>>>>> fa949f9 (newYOLO)
-        while True:
-            frame = process.stdout.readline()
-            if not frame:
-                break
-            yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-    return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-
-
-def get_frame():
-    folder_path = 'runs/detect'
-    subfolders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, f))]    
-    latest_subfolder = max(subfolders, key=lambda x: os.path.getctime(os.path.join(folder_path, x)))
-    filename = predict_img.imgpath    
-    image_path = folder_path+'/'+latest_subfolder+'/'+filename    
-    video = cv2.VideoCapture(image_path) 
-    while True:
-        success, image = video.read()
-        if not success:
-            break
-        ret, jpeg = cv2.imencode('.jpg', image)   
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n\r\n')   
-        time.sleep(0.1)  #control the frame rate to display one frame every 100 milliseconds: 
-
-
 
 @app.route('/<path:filename>')
 def display(filename):
@@ -138,17 +99,10 @@ def predict_img():
 
             file_extension = f.filename.rsplit('.', 1)[1].lower()    
             if file_extension == 'jpg':
-<<<<<<< HEAD
-                process = Popen(["python", "detect.py", '--source', filepath, "--weights","yolov7W6.pt", "--save-txt"], shell=True)
-                process.wait()
-            elif file_extension == 'mp4':
-                process = Popen(["python", "detect.py", '--source', filepath, "--weights","yolov7W6.pt", "--save-txt", "True"], shell=True)
-=======
                 process = Popen(["python", "detect.py", '--source', filepath, "--weights","YoloWeight\yolov7W6.pt", "--save-txt"], shell=True)
                 process.wait()
             elif file_extension == 'mp4':
                 process = Popen(["python", "detect.py", '--source', filepath, "--weights","YoloWeight\yolov7W6.pt", "--save-txt", "True"], shell=True)
->>>>>>> fa949f9 (newYOLO)
                 process.communicate()
                 process.wait()
             
@@ -343,99 +297,16 @@ def calculate_iou(box1, box2):
     iou = intersection_area / union_area if union_area > 0 else 0
     return iou
 
-def gen_frames():
-<<<<<<< HEAD
-    process = Popen(["python", "detect.py", '--source', '0', "--weights", "yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
-=======
-    process = Popen(["python", "detect.py", '--source', '0', "--weights", "YoloWeight\yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
->>>>>>> fa949f9 (newYOLO)
-    while True:
-        frame = process.stdout.readline()
-        if not frame:
-            break
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
         
-cap = None
 
-def initialize_webcam():
-    global cap
-    if cap is None or not cap.isOpened():
-        cap = cv2.VideoCapture(0)
 
-def release_webcam():
-    global cap
-    if cap is not None:
-        cap.release()
-        cap = None
         
         
-# Argument parsing for webDetect.py
-class Opt:
-    def __init__(self):
-<<<<<<< HEAD
-        self.weights = 'yolov7W6.pt'
-=======
-        self.weights = 'YoloWeight\yolov7W6.pt'
->>>>>>> fa949f9 (newYOLO)
-        self.img_size = 320
-        self.device = ''
-        self.no_trace = False
-        self.conf_thres = 0.6
-        self.iou_thres = 0.6
-
-opt = Opt()
-
-# Initialize the model once
-model, modelc, device, half, imgsz = initialize_model(opt)
-
-def generate():
-    initialize_webcam()
-    if not cap.isOpened():
-        raise RuntimeError("Could not start webcam.")
-
-    while True:
-        if cap is None or not cap.isOpened():
-            break
-        ret, frame = cap.read()
-        if not ret:
-            break
-
-        processed_frame, detected_classes = process_frame(model, modelc, device, half, imgsz, frame, opt)
-        ret, buffer = cv2.imencode('.jpg', processed_frame)
-        if not ret:
-            continue
-
-        frame = buffer.tobytes()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/stop_webcam')
-def stop_webcam():
-    release_webcam()
-    return ('', 204)
 
-@app.route('/detected_classes')
-def detected_classes():
-    initialize_webcam()
-    if not cap.isOpened():
-        return jsonify([])
 
-    ret, frame = cap.read()
-    if not ret:
-        return jsonify([])
-
-    _, classes = process_frame(model, modelc, device, half, imgsz, frame, opt)
-    return jsonify(classes)
-
-@app.route('/plot')
-def plot():
-    return plot_png()
 
 
 
@@ -447,13 +318,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Flask app exposing yolov7 models")
     parser.add_argument("--port", default=5000, type=int, help="port number")
     args = parser.parse_args()
-<<<<<<< HEAD
-    model = torch.hub.load('.', 'custom','yoloe6.pt', source='local')
-    model.eval()
-    opt = argparse.Namespace(weights='yolov7W6.pt', img_size=320, device='', no_trace=False)
-=======
-    model = torch.hub.load('.', 'custom','YoloWeight\yolov7W6.pt', source='local')
-    model.eval()
-    opt = argparse.Namespace(weights='YoloWeight\yolov7W6.pt', img_size=320, device='', no_trace=False)
->>>>>>> fa949f9 (newYOLO)
-    app.run(host="0.0.0.0", port=args.port)  # debug=True causes Restarting with stat
+    app.run(host="0.0.0.0", port=args.port)

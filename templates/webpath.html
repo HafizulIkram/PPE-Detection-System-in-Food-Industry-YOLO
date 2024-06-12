@@ -19,6 +19,7 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+<<<<<<< HEAD
       #detected-classes {
         font-family: Arial, sans-serif;
         font-size: 1.2em;
@@ -81,3 +82,178 @@
     </script>
   </body>
 </html>
+=======
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .video-container, .info-container {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-container {
+            text-align: left;
+        }
+
+        .button-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .button-container button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        #detected-classes, #completion_levels {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2em;
+            margin-top: 10px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #result ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #result li {
+            background-color: #e2e6ea;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #d3d3d3;
+        }
+
+        #completion {
+            background-color: #e2e6ea;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #d3d3d3;
+        }
+    </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+    <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>FoodDetect</h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="/" class="nav-item nav-link active">Home</a>
+            <a href="/graphDis" class="nav-item nav-link">Graph</a>
+            <a href="/webDete" class="nav-item nav-link">Webcam</a>
+        </div>
+        <a href="/index" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Image Detection<i class="fa fa-arrow-right ms-3"></i></a>
+    </div>
+</nav>
+
+<!-- Page Content -->
+    <div class="container">
+        <div class="video-container">
+    <h1>Webcam Object Detection with YOLOv8</h1>
+    <label for="confidence">Confidence threshold:</label>
+    <input type="number" id="confidence" min="0" max="1" step="0.01" value="0.25" required>
+    <br><br>
+    <button id="startWebcam" onclick="startWebcam()">Open Webcam</button>
+    <button id="stopWebcam" onclick="stopWebcam()" disabled>Close Webcam</button>
+    <br><br>
+    <img src="" id="videoFeed" width="640" height="480" style="display:none;">
+    <div class="info-container">
+        <h2>Detected Classes:</h2>
+        <div id="detected-classes">
+            <div id="result">
+                <ul></ul>
+            </div>
+        </div>
+        <h2>Completion Levels:</h2>
+        <div id="completion_levels">
+            <div id="completion"></div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        let fetchClassesInterval;
+        let confidence = localStorage.getItem('confidence') || 0.25;
+
+        document.getElementById('confidence').value = confidence;
+
+        function startWebcam() {
+            confidence = document.getElementById('confidence').value;
+            localStorage.setItem('confidence', confidence);
+            
+            const videoFeed = document.getElementById('videoFeed');
+            fetch('/start_camera').then(response => response.json()).then(data => {
+                console.log(data);
+                videoFeed.src = `/video_feed?confidence=${confidence}`;
+                videoFeed.style.display = 'block';
+                document.getElementById('startWebcam').disabled = true;
+                document.getElementById('stopWebcam').disabled = false;
+                startFetchingDetectedClasses();
+            });
+        }
+
+        function stopWebcam() {
+            const videoFeed = document.getElementById('videoFeed');
+            fetch('/stop_camera').then(response => response.json()).then(data => {
+                console.log(data);
+                videoFeed.src = '';
+                videoFeed.style.display = 'none';
+                document.getElementById('startWebcam').disabled = false;
+                document.getElementById('stopWebcam').disabled = true;
+                document.getElementById('result').innerHTML = '<ul></ul>';
+                document.getElementById('completion').innerHTML = '';
+                clearInterval(fetchClassesInterval); // Stop fetching detected classes
+            });
+        }
+
+        function startFetchingDetectedClasses() {
+            fetchClassesInterval = setInterval(() => {
+                fetch('/detected_classes').then(response => response.json()).then(data => {
+                    let classesHTML = '<ul>';
+                    data.detected_classes.forEach(cls => {
+                        classesHTML += `<li>${cls}</li>`;
+                    });
+                    classesHTML += '</ul>';
+                    document.getElementById('result').innerHTML = classesHTML;
+
+                    document.getElementById('completion').innerText = data.completion_status;
+                });
+            }, 1000);
+        }
+    </script>
+  </body>
+</html>
+>>>>>>> fa949f9 (newYOLO)

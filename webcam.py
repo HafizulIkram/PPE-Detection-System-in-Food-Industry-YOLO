@@ -8,7 +8,11 @@ import numpy as np
 # Initialize the model once
 class Opt:
     def __init__(self):
+<<<<<<< HEAD
         self.weights = 'yolov7W6.pt'
+=======
+        self.weights = 'YoloWeight\yolov7W6.pt'
+>>>>>>> fa949f9 (newYOLO)
         self.img_size = 320
         self.device = ''
         self.no_trace = False

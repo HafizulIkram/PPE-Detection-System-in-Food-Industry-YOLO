@@ -64,7 +64,11 @@ def process_frame(model, modelc, device, half, imgsz, frame, opt):
         pred = model(img, augment=False)[0]
 
     # Apply NMS
+<<<<<<< HEAD
     pred = non_max_suppression(pred, conf_thres= 0.6, iou_thres= 0.6, classes=None, agnostic=False, multi_label=False)
+=======
+    pred = non_max_suppression(pred, conf_thres= 0.6, iou_thres= 0.5, classes=None, agnostic=False, multi_label=False)
+>>>>>>> fa949f9 (newYOLO)
 
     detected_classes = []
 
