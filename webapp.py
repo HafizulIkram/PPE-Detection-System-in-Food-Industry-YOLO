@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-"""
-Simple app to upload an image via a web form 
-and view the inference results on the image in the browser.
-"""
-=======
->>>>>>> fa949f9 (newYOLO)
 import argparse
 import io
 from PIL import Image
@@ -59,11 +52,7 @@ def graphDis():
 @app.route("/webcam_feed")
 def webcam_feed():
     def generate():
-<<<<<<< HEAD
-        process = Popen(["python", "detect.py", '--source', '0', "--weights", "yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
-=======
         process = Popen(["python", "detect.py", '--source', '0', "--weights", "YoloWeight\yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
->>>>>>> fa949f9 (newYOLO)
         while True:
             frame = process.stdout.readline()
             if not frame:
@@ -138,17 +127,10 @@ def predict_img():
 
             file_extension = f.filename.rsplit('.', 1)[1].lower()    
             if file_extension == 'jpg':
-<<<<<<< HEAD
-                process = Popen(["python", "detect.py", '--source', filepath, "--weights","yolov7W6.pt", "--save-txt"], shell=True)
-                process.wait()
-            elif file_extension == 'mp4':
-                process = Popen(["python", "detect.py", '--source', filepath, "--weights","yolov7W6.pt", "--save-txt", "True"], shell=True)
-=======
                 process = Popen(["python", "detect.py", '--source', filepath, "--weights","YoloWeight\yolov7W6.pt", "--save-txt"], shell=True)
                 process.wait()
             elif file_extension == 'mp4':
                 process = Popen(["python", "detect.py", '--source', filepath, "--weights","YoloWeight\yolov7W6.pt", "--save-txt", "True"], shell=True)
->>>>>>> fa949f9 (newYOLO)
                 process.communicate()
                 process.wait()
             
@@ -344,11 +326,7 @@ def calculate_iou(box1, box2):
     return iou
 
 def gen_frames():
-<<<<<<< HEAD
-    process = Popen(["python", "detect.py", '--source', '0', "--weights", "yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
-=======
     process = Popen(["python", "detect.py", '--source', '0', "--weights", "YoloWeight\yolov7W6.pt", "--save-txt"], stdout=PIPE, stderr=PIPE)
->>>>>>> fa949f9 (newYOLO)
     while True:
         frame = process.stdout.readline()
         if not frame:
@@ -373,11 +351,7 @@ def release_webcam():
 # Argument parsing for webDetect.py
 class Opt:
     def __init__(self):
-<<<<<<< HEAD
-        self.weights = 'yolov7W6.pt'
-=======
         self.weights = 'YoloWeight\yolov7W6.pt'
->>>>>>> fa949f9 (newYOLO)
         self.img_size = 320
         self.device = ''
         self.no_trace = False
@@ -447,13 +421,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Flask app exposing yolov7 models")
     parser.add_argument("--port", default=5000, type=int, help="port number")
     args = parser.parse_args()
-<<<<<<< HEAD
-    model = torch.hub.load('.', 'custom','yoloe6.pt', source='local')
-    model.eval()
-    opt = argparse.Namespace(weights='yolov7W6.pt', img_size=320, device='', no_trace=False)
-=======
     model = torch.hub.load('.', 'custom','YoloWeight\yolov7W6.pt', source='local')
     model.eval()
     opt = argparse.Namespace(weights='YoloWeight\yolov7W6.pt', img_size=320, device='', no_trace=False)
->>>>>>> fa949f9 (newYOLO)
     app.run(host="0.0.0.0", port=args.port)  # debug=True causes Restarting with stat

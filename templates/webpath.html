@@ -19,70 +19,6 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-<<<<<<< HEAD
-      #detected-classes {
-        font-family: Arial, sans-serif;
-        font-size: 1.2em;
-        margin-top: 10px;
-      }
-    </style>
-</head>
-<body>
-    </div>
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
-        <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>FoodDetect</h1>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="/" class="nav-item nav-link active">Home</a>
-                <a href="/graphDis" class="nav-item nav-link">Graph</a>
-                <a href="/webDete" class="nav-item nav-link">Webcam</a>
-            </div>
-            <a href="/index" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Image Detection<i class="fa fa-arrow-right ms-3"></i></a>
-        </div>
-    </nav>
-  <body>
-    <div style="text-align: center;">
-      <h1>Video Stream</h1>
-      <div>
-        <button id="start-webcam">Start Webcam</button>
-        <button id="stop-webcam">Stop Webcam</button>
-      </div>
-      <img id="video-feed" src="" style="width: 320px; height: 320px; border: 1px solid black; display: none;"/>
-      <div id="detected-classes">
-        <h2>Detected Classes:</h2>
-        <ul id="classes-list"></ul>
-      </div>
-    </div>
-    <script>
-      function fetchDetectedClasses() {
-        $.getJSON('/detected_classes', function(data) {
-          $('#classes-list').empty();
-          $.each(data, function(index, value) {
-            $('#classes-list').append('<li>' + value + '</li>');
-          });
-        });
-      }
-
-      $(document).ready(function() {
-        $('#start-webcam').click(function() {
-          $('#video-feed').attr('src', '/video_feed').show();
-          setInterval(fetchDetectedClasses, 1000);
-        });
-
-        $('#stop-webcam').click(function() {
-          $('#video-feed').hide();
-          $.get('/stop_webcam');
-        });
-      });
-    </script>
-  </body>
-</html>
-=======
         .container {
             background-color: #ffffff;
             padding: 20px;
@@ -256,4 +192,3 @@
     </script>
   </body>
 </html>
->>>>>>> fa949f9 (newYOLO)

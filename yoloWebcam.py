@@ -4,7 +4,6 @@ import numpy as np
 from models.experimental import attempt_load
 from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
-# Load the YOLOv7 model
 
 # Load the YOLOv7 model
 weights_path = 'C:\\Users\\hafiz\\Desktop\\newInterface\\YoloWeight\\yolov7W6.pt'

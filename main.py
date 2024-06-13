@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-# webcam.py
-from flask import Flask, render_template, Response, jsonify
-import argparse
-from image_detection import generate_frames, release_webcam, get_detected_classes, initialize_webcam
-from graph import plot_png
-=======
 from flask import Flask, render_template, Response, jsonify, request, send_file, redirect, send_from_directory, abort, flash, url_for
 import argparse
 from yoloWebcam import detect_cam
@@ -17,13 +10,10 @@ from werkzeug.utils import secure_filename
 import cv2
 import tempfile
 from datetime import datetime
->>>>>>> fa949f9 (newYOLO)
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-<<<<<<< HEAD
-=======
 app.config['UPLOAD_FOLDER'] = 'C:\\Users\\hafiz\\Desktop\\newInterface\\uploads'
 app.config['PREDICTIONS_FOLDER'] = 'C:\\Users\\hafiz\\Desktop\\newInterface\\predictions'
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png'}
@@ -63,7 +53,7 @@ status_chart_filename = None
 def initialize_camera():
     global camera, is_camera_active
     if camera is None or not camera.isOpened():
-        camera = cv2.VideoCapture(1)
+        camera = cv2.VideoCapture(0)
     is_camera_active = True
 
 def release_camera():
@@ -72,7 +62,6 @@ def release_camera():
         camera.release()
     is_camera_active = False
 
->>>>>>> fa949f9 (newYOLO)
 @app.route("/")
 def home():
     return render_template('dashboard.html')
@@ -81,10 +70,7 @@ def home():
 def index():
     return render_template('index.html')
 
-<<<<<<< HEAD
-=======
 
->>>>>>> fa949f9 (newYOLO)
 @app.route("/webcam")
 def webcam():
     return render_template('webcam.html')
@@ -97,25 +83,6 @@ def webDete():
 def graphDis():
     return render_template('graphDisplay.html')
 
-<<<<<<< HEAD
-@app.route("/video_feed")
-def video_feed():
-    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/stop_webcam')
-def stop_webcam():
-    release_webcam()
-    return ('', 204)
-
-@app.route('/detected_classes')
-def detected_classes():
-    classes = get_detected_classes()
-    return jsonify(classes)
-
-@app.route('/plot')
-def plot():
-    return plot_png()
-=======
 def gen_frames(confidence_threshold=0.25):
     global detected_classes, completion_status, is_camera_active
     initialize_camera()
@@ -300,7 +267,6 @@ def prediction_file(filename):
         return send_from_directory(app.config['PREDICTIONS_FOLDER'], filename)
     except FileNotFoundError:
         abort(404)
->>>>>>> fa949f9 (newYOLO)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=5000)
